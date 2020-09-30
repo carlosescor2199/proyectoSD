@@ -1,16 +1,22 @@
+package controlador;
+
 import java.io.*;
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
-public class readFile extends Thread{
-    private BigDecimal sum = BigDecimal.ZERO;
+public class ImporteTotal extends Thread{
+    private BigDecimal importeVentasTotal = BigDecimal.ZERO;
     private String file;
 
     public BigDecimal getSum() {
-        return sum;
+        return importeVentasTotal;
     }
 
 
-    public readFile(String file) {
+    public ImporteTotal(String file) {
         this.file = file;
     }
 
@@ -26,7 +32,7 @@ public class readFile extends Thread{
                 String [] parts = line.split(",");
                 if(cont > 0){
                     BigDecimal num = new BigDecimal(parts[3]);
-                    sum =  sum.add(num);
+                    importeVentasTotal =  importeVentasTotal.add(num);
                 }
                 cont++;
             }
