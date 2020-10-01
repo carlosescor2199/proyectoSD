@@ -14,12 +14,12 @@ public class main {
     private static ArrayList<BigDecimal> anios = new ArrayList<>();
     private static Map<String, BigDecimal> mesAnios = new TreeMap<>();
     private static Map<String, BigDecimal> trimestreAnios = new TreeMap<>();
+    private static final int numCores = Runtime.getRuntime().availableProcessors();
 
     private static void importeTotal() {
         long tiempoInicial = System.currentTimeMillis();
         BigDecimal res = BigDecimal.ZERO;
         int hilo = 0;
-        int numCores = Runtime.getRuntime().availableProcessors();
         int cont = 0;
         ArrayList<ImporteTotal> ImporteTotals = new ArrayList<ImporteTotal>();
 
@@ -32,19 +32,20 @@ public class main {
 
         for(ImporteTotal it : ImporteTotals) {
             if(cont < numCores){
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
                 it.start();
                 cont++;
                 hilo++;
             } else {
-                for(int i=0; i<numCores; i++){
+                System.out.println(cont + " - " + hilo);
+                for(int i=(hilo-numCores); i<=hilo; i++){
                     while (ImporteTotals.get(i).isAlive());
                 }
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
+                cont=0;
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
                 it.start();
                 cont++;
                 hilo++;
-                cont=0;
             }
         }
 
@@ -66,7 +67,6 @@ public class main {
     private static BigDecimal importeAnio(String anio) {
         long tiempoInicial = System.currentTimeMillis();
         int hilo = 0;
-        int numCores = Runtime.getRuntime().availableProcessors();
         int cont = 0;
         ArrayList<ImporteAnio> importeAnios = new ArrayList<ImporteAnio>();
         Map<String, BigDecimal> result = new TreeMap<>();
@@ -78,21 +78,22 @@ public class main {
 
         System.out.println("Número de Cores: " + numCores);
 
-        for(ImporteAnio ima : importeAnios) {
+        for(ImporteAnio ia : importeAnios) {
             if(cont < numCores){
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
-                ima.start();
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
+                ia.start();
                 cont++;
                 hilo++;
             } else {
-                for(int i=0; i<numCores; i++){
+                System.out.println(cont + " - " + hilo);
+                for(int i=(hilo-numCores); i<=hilo; i++){
                     while (importeAnios.get(i).isAlive());
                 }
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
-                ima.start();
+                cont=0;
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
+                ia.start();
                 cont++;
                 hilo++;
-                cont=0;
             }
         }
 
@@ -124,7 +125,6 @@ public class main {
         long tiempoInicial = System.currentTimeMillis();
         BigDecimal res = BigDecimal.ZERO;
         int hilo = 0;
-        int numCores = Runtime.getRuntime().availableProcessors();
         int cont = 0;
         ArrayList<ImporteMesAnio> importeMesAnios = new ArrayList<ImporteMesAnio>();
         Map<String, BigDecimal> result = new TreeMap<>();
@@ -136,21 +136,22 @@ public class main {
 
         System.out.println("Número de Cores: " + numCores);
 
-        for(ImporteMesAnio ia : importeMesAnios) {
+        for(ImporteMesAnio ima : importeMesAnios) {
             if(cont < numCores){
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
-                ia.start();
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
+                ima.start();
                 cont++;
                 hilo++;
             } else {
-                for(int i=0; i<numCores; i++){
+                System.out.println(cont + " - " + hilo);
+                for(int i=(hilo-numCores); i<=hilo; i++){
                     while (importeMesAnios.get(i).isAlive());
                 }
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
-                ia.start();
+                cont=0;
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
+                ima.start();
                 cont++;
                 hilo++;
-                cont=0;
             }
         }
 
@@ -181,7 +182,6 @@ public class main {
         long tiempoInicial = System.currentTimeMillis();
         BigDecimal res = BigDecimal.ZERO;
         int hilo = 0;
-        int numCores = Runtime.getRuntime().availableProcessors();
         int cont = 0;
         ArrayList<ImporteTrimestreAnio> importeTrimestreAnios = new ArrayList<ImporteTrimestreAnio>();
         Map<String, BigDecimal> result = new TreeMap<>();
@@ -195,19 +195,20 @@ public class main {
 
         for(ImporteTrimestreAnio ita : importeTrimestreAnios) {
             if(cont < numCores){
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
                 ita.start();
                 cont++;
                 hilo++;
             } else {
-                for(int i=0; i<numCores; i++){
+                System.out.println(cont + " - " + hilo);
+                for(int i=(hilo-numCores); i<=hilo; i++){
                     while (importeTrimestreAnios.get(i).isAlive());
                 }
-                System.out.println("Hilo " + (hilo+1) + " en ejecución");
+                cont=0;
+                System.out.println("Hilo " + (cont+1) + " en ejecución");
                 ita.start();
                 cont++;
                 hilo++;
-                cont=0;
             }
         }
 
