@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 public class ImporteAnio extends Thread{
     Map<String, BigDecimal> listImpYear = new TreeMap<>();
-    private BigDecimal importeYear = BigDecimal.ZERO;
     private String file;
 
     public Map<String, BigDecimal> getSum() {

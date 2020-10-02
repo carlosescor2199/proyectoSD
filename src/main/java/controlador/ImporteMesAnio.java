@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 public class ImporteMesAnio extends Thread{
     Map<String, BigDecimal> listImpMesAnio = new TreeMap<>();
-    private BigDecimal importeMesAnio = BigDecimal.ZERO;
     private String file;
 
     public Map<String, BigDecimal> getSum() {
